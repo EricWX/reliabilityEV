@@ -1,0 +1,12 @@
+% calculate total electricity usage of a week
+
+% number total cars
+n_car_ca = 15 *10^6;
+% fraction of EV
+EV_ratio = 1/3;
+% miles per veicle per year 
+miles_per_year = 11071;
+% ave kWh/100miles
+ave_kwh_100miles = 25;
+
+Weekly_power_usage =  n_car_ca * EV_ratio * miles_per_year/100
