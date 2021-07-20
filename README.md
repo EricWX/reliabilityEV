@@ -1,2 +1,2 @@
-# Reliability Analysis for grid with EV and storage
+# Reliability Analysis for Grid with EV and Storage
 
