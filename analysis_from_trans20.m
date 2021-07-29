@@ -12,13 +12,14 @@ load load2019_r
 
 % load_train = [load2017_r, load2018_r]';
 load_train = [load2017_r, load2018_r]'/max(load2019_r) * 1000 /.93;
-load_test = load2019_r'/max(load2019_r) * 1000;
+load_test = load2019_r'/max(load2019_r) * 1000/.89;
 
 load solar_train
 load solar_test
 
 solar_train_sub = solar_train(end-17520+1:end) * 1000;
-solar_train = solar_train * 1000;
+solar_train = solar14_18*1000;
+% solar_train = solar_train * 1000;
 solar_test = solar_test * 1000;
 
 load wind_train
@@ -34,7 +35,7 @@ t19s = datetime(2019,1,1,0,0,0);
 t19e = datetime(2019,12,31,23,0,0);
 
 %15_18 time
-t15s = datetime(2015, 1, 1, 0, 0, 0);
+t15s = datetime(2014, 1, 1, 0, 0, 0);
 t18e = datetime(2018,12,31,23,0,0);
 
 %17_18 time
@@ -51,7 +52,7 @@ Holidays_17_18 = holidays(t17s, t18e);
 Holidays_19 = holidays(t19s, t19e);
 
 quant = 0.05:.1:.95;
-
+n_quant = length(quant);
 
 Month_real = kron(speye(12), ones(24*7*2,1));
 Hour_real = kron(ones(12*7,1),kron(speye(24),ones(2,1)));
@@ -615,9 +616,9 @@ Battery_op = [0,0,0,0,0,-1/48,...
               0.2,0.2,0.25,0.15,0.05,0.05];
 Pump_op= Battery_op;
 
-EV_op_perfect = [-1/80,-1/80,-1/80,-1/40,-1/40,-1/80,...
+EV_op_perfect = [-1/80,-1/80,-1/80,-1/40,-1/40,-2/80,...
               -3/80,-5/80,-7/80 ,-4/40,-4/40,-1/10,...
-              -4/40,-4/40,-3/40,-5/80,-4/80,-1/80, ...
+              -4/40,-4/40,-3/40,-5/80,-4/80,-0/80, ...
               0,0,0,0,0,-1/80];
 
 

@@ -82,7 +82,7 @@ lambda7 = lambda(7);
 %% solve 
 % cvx_solver SeDuMi
 tic;
-cvx_begin quiet
+cvx_begin
     variables beta_demand(n_quant,n) alpha_demand(n_quant) 
     variables r_wind_M_H(288)  r_solar_M_H(288)
     % ob1 is the object on quantile model

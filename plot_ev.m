@@ -245,6 +245,73 @@ print(gcf, '-bestfit','-dpdf', 'plots\energy_profile2.pdf');
 
 
 
+
+
+
+% profile of EV and storage
+k_scaling = 4;          % scaling factor of the figure
+% (You need to plot a figure which has a width of (8.8 * k_scaling)
+% in MATLAB, so that when you paste it into your paper, the width will be
+% scalled down to 8.8 cm  which can guarantee a preferred clearness.
+k_width_hight = 2;      % width:hight ratio of the figure
+
+width = 8.8 * k_scaling;
+hight = width / k_width_hight;
+
+%% figure margins
+top = 2*.7;  % normalized top margin
+bottom = 3*5/5;	% normalized bottom margin
+left = 4 * 1;	% normalized left margin
+right = 0.5/3;  % normalized right margin
+
+%% set default figure configurations
+set(0,'defaultFigureUnits','centimeters');
+set(0,'defaultFigurePosition',[0 0 17 17/2]);
+
+
+
+% normal
+%% set default figure configurations
+set(0,'defaultFigureUnits','centimeters');
+set(0,'defaultFigurePosition',[0 0 17 17/2]);
+
+
+% 
+% %% set default figure configurations
+% set(0,'defaultFigureUnits','centimeters');
+% set(0,'defaultFigurePosition',[0 0 17 17*7/10]);
+
+%
+set(0,'defaultLineLineWidth',.5*k_scaling);
+set(0,'defaultAxesLineWidth',0.25*k_scaling);
+
+set(0,'defaultAxesGridLineStyle',':');
+set(0,'defaultAxesYGrid','on');
+set(0,'defaultAxesXGrid','on');
+
+set(0,'defaultAxesFontName','Times New Roman');
+set(0,'defaultAxesFontSize',4*k_scaling);
+
+set(0,'defaultTextFontName','Times New Roman');
+set(0,'defaultTextFontSize',4*k_scaling);
+
+set(0,'defaultLegendFontName','Times New Roman');
+set(0,'defaultLegendFontSize',2*k_scaling);
+
+
+set(0,'defaultAxesUnits','normalized');
+set(0,'defaultAxesPosition',[left/width bottom/hight (width-left-right)/width  (hight-bottom-top)/hight]);
+
+% set(0,'defaultAxesColorOrder',[0 0 0]);
+set(0,'defaultAxesTickDir','out');
+
+set(0,'defaultFigurePaperPositionMode','auto');
+
+% you can change the Legend Location to whatever as you wish
+set(0,'defaultLegendLocation','southeast');
+set(0,'defaultLegendBox','on');
+set(0,'defaultLegendOrientation','vertical');
+
 EV_op_perfect = - [-1/80,-1/40,-1/40,-1/40,-1/40,-1/40,...
               -1/20,-5/80,-7/80 ,-4/40,-4/40,-1/10,...
               -4/40,-4/40,-3/40,-4/80,-1/40,0, ...
@@ -280,16 +347,23 @@ plot(0:23, EV_op_perfect)
 
 
 
-
+figure
 stairs(0:24, [Battery_op, Battery_op(end)], 'LineWidth',2)
 hold on
 stairs(0:23, EV_op_predict)
 
+
+
+figure
+stairs(0:24, [EV_op_predict, EV_op_predict(end)], 'LineWidth',2)
+hold on
+stairs(0:24, -[EV_op_perfect, EV_op_perfect(end)], 'LineWidth',2)
+
 ylim([0,.1])
-xlim([0,23])
+xlim([0,24])
 ylabel('Percentage')
 xlabel('Hour of a Day')
-legend('Scenario A', 'Scenario C')
+legend('Scenario A', 'Scenario B')
 
 title(upper('EV Charging Profile'))
 
@@ -302,7 +376,7 @@ set(FigHandle, 'PaperPosition', [0 0 x_width y_height]);
 FigHandle.PaperPositionMode = 'auto';
 fig_pos = FigHandle.PaperPosition;
 FigHandle.PaperSize = [fig_pos(3) fig_pos(4)];
-print(gcf, '-bestfit','-dpdf', 'plots\EV_charging_profile2.pdf');
+print(gcf, '-bestfit','-dpdf', 'plots\EV_charging_profile4.pdf');
 
 
 
@@ -381,7 +455,7 @@ set(FigHandle, 'PaperPosition', [0 0 x_width y_height]);
 FigHandle.PaperPositionMode = 'auto';
 fig_pos = FigHandle.PaperPosition;
 FigHandle.PaperSize = [fig_pos(3) fig_pos(4)];
-print(gcf, '-bestfit','-dpdf', 'plots\gamma_lw.pdf');
+print(gcf, '-bestfit','-dpdf', 'plots\gamma_lw_EV.pdf');
 
 
 
@@ -409,7 +483,7 @@ set(FigHandle, 'PaperPosition', [0 0 x_width y_height]);
 FigHandle.PaperPositionMode = 'auto';
 fig_pos = FigHandle.PaperPosition;
 FigHandle.PaperSize = [fig_pos(3) fig_pos(4)];
-print(gcf, '-bestfit','-dpdf', 'plots\gamma_ls.pdf');
+print(gcf, '-bestfit','-dpdf', 'plots\gamma_ls_EV.pdf');
 
 
 
@@ -441,7 +515,7 @@ set(FigHandle, 'PaperPosition', [0 0 x_width y_height]);
 FigHandle.PaperPositionMode = 'auto';
 fig_pos = FigHandle.PaperPosition;
 FigHandle.PaperSize = [fig_pos(3) fig_pos(4)];
-print(gcf, '-bestfit','-dpdf', 'plots\gamma_ws.pdf');
+print(gcf, '-bestfit','-dpdf', 'plots\gamma_ws_EV.pdf');
 
 
 LOLH_s0 = [0.2393
@@ -816,6 +890,110 @@ fig_pos = FigHandle.PaperPosition;
 FigHandle.PaperSize = [fig_pos(3) fig_pos(4)];
 print(gcf, '-bestfit','-dpdf', 'plots\peak_week_LOLP_original.pdf');
 print(gcf, '-bestfit','-dpdf', 'plots\peak_week_LOLP_updated.pdf');
+
+
+
+
+
+%% Install Rate
+
+% profile of EV and storage
+k_scaling = 4;          % scaling factor of the figure
+% (You need to plot a figure which has a width of (8.8 * k_scaling)
+% in MATLAB, so that when you paste it into your paper, the width will be
+% scalled down to 8.8 cm  which can guarantee a preferred clearness.
+k_width_hight = 2;      % width:hight ratio of the figure
+
+width = 8.8 * k_scaling;
+hight = width / k_width_hight;
+
+%% figure margins
+top = 2*.7;  % normalized top margin
+bottom = 3*3/5;	% normalized bottom margin
+left = 2 * 1;	% normalized left margin
+right = 0.2/3;  % normalized right margin
+
+%% set default figure configurations
+set(0,'defaultFigureUnits','centimeters');
+set(0,'defaultFigurePosition',[0 0 17 17/2]);
+
+
+
+% normal
+%% set default figure configurations
+set(0,'defaultFigureUnits','centimeters');
+set(0,'defaultFigurePosition',[0 0 17 17/2]);
+
+
+% 
+% %% set default figure configurations
+% set(0,'defaultFigureUnits','centimeters');
+% set(0,'defaultFigurePosition',[0 0 17 17*7/10]);
+
+%
+set(0,'defaultLineLineWidth',.5*k_scaling);
+set(0,'defaultAxesLineWidth',0.25*k_scaling);
+
+set(0,'defaultAxesGridLineStyle',':');
+set(0,'defaultAxesYGrid','on');
+set(0,'defaultAxesXGrid','on');
+
+set(0,'defaultAxesFontName','Times New Roman');
+set(0,'defaultAxesFontSize',4*k_scaling);
+
+set(0,'defaultTextFontName','Times New Roman');
+set(0,'defaultTextFontSize',4*k_scaling);
+
+set(0,'defaultLegendFontName','Times New Roman');
+set(0,'defaultLegendFontSize',2*k_scaling);
+
+
+set(0,'defaultAxesUnits','normalized');
+set(0,'defaultAxesPosition',[left/width bottom/hight (width-left-right)/width  (hight-bottom-top)/hight]);
+
+% set(0,'defaultAxesColorOrder',[0 0 0]);
+set(0,'defaultAxesTickDir','out');
+
+set(0,'defaultFigurePaperPositionMode','auto');
+
+% you can change the Legend Location to whatever as you wish
+set(0,'defaultLegendLocation','southeast');
+set(0,'defaultLegendBox','on');
+set(0,'defaultLegendOrientation','vertical');
+
+
+
+solar_install = 2.8;
+wind_install = 0.9;
+Battery_install = 2.0;
+
+install_rate = [2.8, 0.9, 2.0];
+install_rate_str = ["2.8", "0.9", "2.0"];
+
+install_type = ["Solar", "Wind", "Battery"];
+
+figure
+bar(install_rate);
+text(1:3,install_rate,install_rate_str,'vert','bottom','horiz','center'); 
+ylabel("GW/year")
+title(upper("25-year Average Building Rate"))
+xticks([1 2 3])
+xticklabels({'Solar','Wind','Battery'})
+
+
+
+
+x_width =18.2386; % NOT TESTED, MIGHT REQUIRE TWEAKING
+y_height = 15.4667; % NOT TESTED, MIGHT REQUIRE TWEAKING
+FigHandle = gcf;
+set(FigHandle, 'PaperUnits', 'centimeters');
+set(FigHandle, 'PaperPosition', [0 0 x_width y_height]);
+%%% set figure to have no margins
+FigHandle.PaperPositionMode = 'auto';
+fig_pos = FigHandle.PaperPosition;
+FigHandle.PaperSize = [fig_pos(3) fig_pos(4)];
+print(gcf, '-bestfit','-dpdf', 'plots\building_rate.pdf');
+
 
 
 

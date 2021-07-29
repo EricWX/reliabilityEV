@@ -245,6 +245,73 @@ print(gcf, '-bestfit','-dpdf', 'plots\energy_profile2.pdf');
 
 
 
+
+
+
+% profile of EV and storage
+k_scaling = 4;          % scaling factor of the figure
+% (You need to plot a figure which has a width of (8.8 * k_scaling)
+% in MATLAB, so that when you paste it into your paper, the width will be
+% scalled down to 8.8 cm  which can guarantee a preferred clearness.
+k_width_hight = 2;      % width:hight ratio of the figure
+
+width = 8.8 * k_scaling;
+hight = width / k_width_hight;
+
+%% figure margins
+top = 2*.7;  % normalized top margin
+bottom = 3*5/5;	% normalized bottom margin
+left = 4 * 1.2;	% normalized left margin
+right = 0.5/3;  % normalized right margin
+
+%% set default figure configurations
+set(0,'defaultFigureUnits','centimeters');
+set(0,'defaultFigurePosition',[0 0 17 17/2]);
+
+
+
+% normal
+%% set default figure configurations
+set(0,'defaultFigureUnits','centimeters');
+set(0,'defaultFigurePosition',[0 0 17 17/2]);
+
+
+% 
+% %% set default figure configurations
+% set(0,'defaultFigureUnits','centimeters');
+% set(0,'defaultFigurePosition',[0 0 17 17*7/10]);
+
+%
+set(0,'defaultLineLineWidth',.5*k_scaling);
+set(0,'defaultAxesLineWidth',0.25*k_scaling);
+
+set(0,'defaultAxesGridLineStyle',':');
+set(0,'defaultAxesYGrid','on');
+set(0,'defaultAxesXGrid','on');
+
+set(0,'defaultAxesFontName','Times New Roman');
+set(0,'defaultAxesFontSize',4*k_scaling);
+
+set(0,'defaultTextFontName','Times New Roman');
+set(0,'defaultTextFontSize',4*k_scaling);
+
+set(0,'defaultLegendFontName','Times New Roman');
+set(0,'defaultLegendFontSize',2*k_scaling);
+
+
+set(0,'defaultAxesUnits','normalized');
+set(0,'defaultAxesPosition',[left/width bottom/hight (width-left-right)/width  (hight-bottom-top)/hight]);
+
+% set(0,'defaultAxesColorOrder',[0 0 0]);
+set(0,'defaultAxesTickDir','out');
+
+set(0,'defaultFigurePaperPositionMode','auto');
+
+% you can change the Legend Location to whatever as you wish
+set(0,'defaultLegendLocation','southeast');
+set(0,'defaultLegendBox','on');
+set(0,'defaultLegendOrientation','vertical');
+
 EV_op_perfect = - [-1/80,-1/40,-1/40,-1/40,-1/40,-1/40,...
               -1/20,-5/80,-7/80 ,-4/40,-4/40,-1/10,...
               -4/40,-4/40,-3/40,-4/80,-1/40,0, ...
@@ -280,16 +347,23 @@ plot(0:23, EV_op_perfect)
 
 
 
-
+figure
 stairs(0:24, [Battery_op, Battery_op(end)], 'LineWidth',2)
 hold on
 stairs(0:23, EV_op_predict)
 
+
+
+figure
+stairs(0:24, [EV_op_predict, EV_op_predict(end)], 'LineWidth',2)
+hold on
+stairs(0:24, -[EV_op_perfect, EV_op_perfect(end)], 'LineWidth',2)
+
 ylim([0,.1])
-xlim([0,23])
+xlim([0,24])
 ylabel('Percentage')
 xlabel('Hour of a Day')
-legend('Scenario A', 'Scenario C')
+legend('Scenario A', 'Scenario B')
 
 title(upper('EV Charging Profile'))
 
@@ -302,7 +376,7 @@ set(FigHandle, 'PaperPosition', [0 0 x_width y_height]);
 FigHandle.PaperPositionMode = 'auto';
 fig_pos = FigHandle.PaperPosition;
 FigHandle.PaperSize = [fig_pos(3) fig_pos(4)];
-print(gcf, '-bestfit','-dpdf', 'plots\EV_charging_profile2.pdf');
+print(gcf, '-bestfit','-dpdf', 'plots\EV_charging_profile4.pdf');
 
 
 
@@ -574,7 +648,220 @@ Battery_op = [-1/6,-1/6,-1/6,-1/6,-1/6,-1/6,...
 
 
 
-          
+
+k_scaling = 4;          % scaling factor of the figure
+% (You need to plot a figure which has a width of (8.8 * k_scaling)
+% in MATLAB, so that when you paste it into your paper, the width will be
+% scalled down to 8.8 cm  which can guarantee a preferred clearness.
+k_width_hight = 2;      % width:hight ratio of the figure
+
+width = 8.8 * k_scaling;
+hight = width / k_width_hight;
+
+%% figure margins
+top = 2*.7;  % normalized top margin
+bottom = 3*5/5;	% normalized bottom margin
+left = 2*.6;	% normalized left margin
+right = 0.5/3;  % normalized right margin
+
+%% set default figure configurations
+set(0,'defaultFigureUnits','centimeters');
+set(0,'defaultFigurePosition',[0 0 17 17/2]);
+
+% % For correlaiton 
+% k_scaling = 4;          % scaling factor of the figure
+% % (You need to plot a figure which has a width of (8.8 * k_scaling)
+% % in MATLAB, so that when you paste it into your paper, the width will be
+% % scalled down to 8.8 cm  which can guarantee a preferred clearness.
+% k_width_hight = 2;      % width:hight ratio of the figure
+% 
+% width = 8.8 * k_scaling;
+% hight = width / k_width_hight;
+% 
+% %% figure margins
+% top = 2/9;  % normalized top margin
+% bottom = 3/2*1.35;	% normalized bottom margin
+% left = 3*1.5;	% normalized left margin
+% right = 0.5/2;  % normalized right margin
+
+
+%% For PP plots
+% k_scaling = 5;          % scaling factor of the figure
+% % (You need to plot a figure which has a width of (8.8 * k_scaling)
+% % in MATLAB, so that when you paste it into your paper, the width will be
+% % scalled down to 8.8 cm  which can guarantee a preferred clearness.
+% k_width_hight = 2;      % width:hight ratio of the figure
+% 
+% width = 8.8 * k_scaling;
+% hight = width / k_width_hight;
+% 
+% %% figure margins
+% top = 2/3*2;  % normalized top margin
+% bottom = 3/2;	% normalized bottom margin
+% left =  - 3/28;	% normalized left margin
+% right = 0;  % normalized right margin
+% 
+% %% set default figure configurations
+% set(0,'defaultFigureUnits','centimeters');
+% set(0,'defaultFigurePosition',[0 0 17 17]);
+% 
+% 
+% 
+% %% set default figure configurations
+% set(0,'defaultFigureUnits','centimeters');
+% set(0,'defaultFigurePosition',[0 0 17 17*7/10]);
+% 
+% %%
+% set(0,'defaultLineLineWidth',.7*k_scaling);
+% set(0,'defaultAxesLineWidth',0.25*k_scaling);
+% 
+% set(0,'defaultAxesGridLineStyle',':');
+% set(0,'defaultAxesYGrid','on');
+% set(0,'defaultAxesXGrid','on');
+% 
+% set(0,'defaultAxesFontName','Times New Roman');
+% set(0,'defaultAxesFontSize',5*k_scaling);
+% 
+% set(0,'defaultTextFontName','Times New Roman');
+% set(0,'defaultTextFontSize',5*k_scaling);
+% 
+% set(0,'defaultLegendFontName','Times New Roman');
+% set(0,'defaultLegendFontSize',3*k_scaling);
+
+
+
+% normal
+%% set default figure configurations
+set(0,'defaultFigureUnits','centimeters');
+set(0,'defaultFigurePosition',[0 0 17 17/2]);
+
+
+% 
+% %% set default figure configurations
+% set(0,'defaultFigureUnits','centimeters');
+% set(0,'defaultFigurePosition',[0 0 17 17*7/10]);
+
+%
+set(0,'defaultLineLineWidth',.5*k_scaling);
+set(0,'defaultAxesLineWidth',0.25*k_scaling);
+
+set(0,'defaultAxesGridLineStyle',':');
+set(0,'defaultAxesYGrid','on');
+set(0,'defaultAxesXGrid','on');
+
+set(0,'defaultAxesFontName','Times New Roman');
+set(0,'defaultAxesFontSize',4*k_scaling);
+
+set(0,'defaultTextFontName','Times New Roman');
+set(0,'defaultTextFontSize',4*k_scaling);
+
+set(0,'defaultLegendFontName','Times New Roman');
+set(0,'defaultLegendFontSize',2*k_scaling);
+
+
+set(0,'defaultAxesUnits','normalized');
+set(0,'defaultAxesPosition',[left/width bottom/hight (width-left-right)/width  (hight-bottom-top)/hight]);
+
+% set(0,'defaultAxesColorOrder',[0 0 0]);
+set(0,'defaultAxesTickDir','out');
+
+set(0,'defaultFigurePaperPositionMode','auto');
+
+% you can change the Legend Location to whatever as you wish
+set(0,'defaultLegendLocation','southeast');
+set(0,'defaultLegendBox','on');
+set(0,'defaultLegendOrientation','vertical');
+
+figure
+charging = [repelem(0,17), 5, 10 , 15 , 20, 25, 30, 35, 40];
+xlim([0, 24]);
+xlabel('Window Length (hour)')
+ylabel('GW')
+plot(0:24, charging)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% profile of EV and storage
+k_scaling = 4;          % scaling factor of the figure
+% (You need to plot a figure which has a width of (8.8 * k_scaling)
+% in MATLAB, so that when you paste it into your paper, the width will be
+% scalled down to 8.8 cm  which can guarantee a preferred clearness.
+k_width_hight = 2;      % width:hight ratio of the figure
+
+width = 8.8 * k_scaling;
+hight = width / k_width_hight;
+
+%% figure margins
+top = 2*.7;  % normalized top margin
+bottom = 3*3/5;	% normalized bottom margin
+left = 4 * 1;	% normalized left margin
+right = 0.5/3;  % normalized right margin
+
+%% set default figure configurations
+set(0,'defaultFigureUnits','centimeters');
+set(0,'defaultFigurePosition',[0 0 17 17/2]);
+
+
+
+% normal
+%% set default figure configurations
+set(0,'defaultFigureUnits','centimeters');
+set(0,'defaultFigurePosition',[0 0 17 17/2]);
+
+
+% 
+% %% set default figure configurations
+% set(0,'defaultFigureUnits','centimeters');
+% set(0,'defaultFigurePosition',[0 0 17 17*7/10]);
+
+%
+set(0,'defaultLineLineWidth',.5*k_scaling);
+set(0,'defaultAxesLineWidth',0.25*k_scaling);
+
+set(0,'defaultAxesGridLineStyle',':');
+set(0,'defaultAxesYGrid','on');
+set(0,'defaultAxesXGrid','on');
+
+set(0,'defaultAxesFontName','Times New Roman');
+set(0,'defaultAxesFontSize',4*k_scaling);
+
+set(0,'defaultTextFontName','Times New Roman');
+set(0,'defaultTextFontSize',4*k_scaling);
+
+set(0,'defaultLegendFontName','Times New Roman');
+set(0,'defaultLegendFontSize',2*k_scaling);
+
+
+set(0,'defaultAxesUnits','normalized');
+set(0,'defaultAxesPosition',[left/width bottom/hight (width-left-right)/width  (hight-bottom-top)/hight]);
+
+% set(0,'defaultAxesColorOrder',[0 0 0]);
+set(0,'defaultAxesTickDir','out');
+
+set(0,'defaultFigurePaperPositionMode','auto');
+
+% you can change the Legend Location to whatever as you wish
+set(0,'defaultLegendLocation','southeast');
+set(0,'defaultLegendBox','on');
+set(0,'defaultLegendOrientation','vertical');
+
+
           
 figure
 ax_weekday1 = 12 : 24 : 156;
@@ -585,12 +872,24 @@ grid;
 set(gcf,'nextplot','add');
 set(ax(1),'Xlim',[0,167],'XTick',ax_weekday1,'XTicklabel',Weekday_xlable,'YTickLabel',[]);
 ax(2)=axes('position',get(ax(1),'position'),'Visible', 'off');
-plot(0:167,listOfProb_power_upper(4393:5041+7*24-1))
+plot(0:167,listOfProb_power_upper(4321:4321+7*24-1))
 set(ax(2),'Xlim',[0,168],'XTick',ax_weekday2,'XTicklabel','');
 % xlabel('Weekday')
 ylabel('Probability')
 title('Peak Week LOLP')
 
+
+x_width =18.2386; % NOT TESTED, MIGHT REQUIRE TWEAKING
+y_height = 15.4667; % NOT TESTED, MIGHT REQUIRE TWEAKING
+FigHandle = gcf;
+set(FigHandle, 'PaperUnits', 'centimeters');
+set(FigHandle, 'PaperPosition', [0 0 x_width y_height]);
+%%% set figure to have no margins
+FigHandle.PaperPositionMode = 'auto';
+fig_pos = FigHandle.PaperPosition;
+FigHandle.PaperSize = [fig_pos(3) fig_pos(4)];
+print(gcf, '-bestfit','-dpdf', 'plots\peak_week_LOLP_original.pdf');
+print(gcf, '-bestfit','-dpdf', 'plots\peak_week_LOLP_updated.pdf');
 
 
 

@@ -3,7 +3,7 @@
 load_temp = load1(zone == 'CA ISO');
 hour_temp = hour(hour1(zone == 'CA ISO'));
 date_temp = Date(zone == 'CA ISO');
-
+hour_temp = hour(date_temp);
 
 load2018_r = [load_temp(1)];
 idx = 1;

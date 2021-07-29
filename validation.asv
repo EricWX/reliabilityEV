@@ -145,7 +145,7 @@ n_quant = length(quant_s_w);
 for i = 1:6
         show = sprintf('i : %d, j : %d ', i,j);
         disp(show)
-        lambda = [10^(-3), 10^(0)];  % -1,-1
+        lambda = [10^(i-4), 10^(0)];  % -1,-1
         [beta_solar,pred_solar] =opt_solar_power(quant_s_w, solar_train, date15_18, lambda, 1);  
 %         [beta_solar, alpha_solar,pred_solar] =opt_solar(quant_solar, day_night_indicator,Solar_train, date15,lambda);
         %train error
@@ -164,7 +164,7 @@ for i = 1:6
         test_stats_train_list(i) = train_stats;
         test_stats_test_list(i) = test_stats;
 
-end 
+end
 
 
 

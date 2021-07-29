@@ -27,9 +27,9 @@ n_solar = 12 * 24;
 
 n_quant = length(quant);
 
-diff_matrix_beta = sparse(diff(diff(diag(ones(n_quant,1)))));
-diff_beta_tail = diff(diag(ones(2,1)));
-diff_matrix_alpha = sparse(diff(diff(diag(ones(n_quant-1,1)))));
+diff_matrix_beta = sparse(diff(diag(ones(n_quant-2,1))));
+% diff_beta_tail = diff(diag(ones(2,1)));
+% diff_matrix_alpha = sparse(diff(diff(diag(ones(n_quant-1,1)))));
 diff_matrix_q = sparse(diff(diag(ones(n_quant,1))));
 
 
@@ -41,17 +41,18 @@ lambda2 = lambda(2);
 
 
 tic;
-cvx_solver SDPT3
+% cvx_solver SDPT3
+% cvx_solver SeDuMi
 
 cvx_begin 
     variables beta_solar(n_quant,n_solar)
     ob1_pre = (Solar * ones(1,n_quant) - (A * beta_solar'))  ;
     ob1 = 0.5 * sum(sum(abs(ob1_pre))) + ones(1,n_r) * ob1_pre * (quant - 0.5)';
-%     ob2_pre = diff_matrix_beta * beta_solar;
-%     ob2 = sum(sum(ob2_pre .* ob2_pre));
+    ob2_pre = diff_matrix_beta * beta_solar(2:end-1,:);
+    ob2 = sum(sum(ob2_pre .* ob2_pre));
 %     ob3_pre = diff_matrix_alpha * alpha_solar(2:(end));
 %     ob3 = sum(ob3_pre .* ob3_pre);
-    minimize( ob1  ) % + lambda1 * ob2 +lambda2 * ob3
+    minimize( ob1 + lambda1 * ob2 ) % + lambda1 * ob2 +lambda2 * ob3
     pred_solar = (A * beta_solar');
     subject to 
         pred_solar(:,1) >= 0          
